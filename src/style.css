@@ -1,7 +1,7 @@
 #root {
     font-family: 'Karla';
 }
-
+/*Navbar Styling*/
 .navbar > img {
     width: auto;
     height: 65px;
@@ -14,7 +14,8 @@
     align-items: center;
     height: 65px;
     margin: -10px;
-    background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+    background: linear-gradient(90deg, #8FA01F 1.18%, #DED93E 100%);
+    margin-bottom: 0px;
 }
 
 .navbar > p {
@@ -25,4 +26,38 @@
     font-style:normal;
     letter-spacing: -0.07em;
     font-size: 20.75px;
+}
+
+/* form styling */
+
+.form {
+    display: grid;
+    grid-template-columns: minmax(36px,auto) 230px 17px 230px minmax(36px,auto);
+    grid-template-rows: 36px 35px 15px 40px;
+    margin-bottom: 36px;
+}
+
+.text-field {
+    border: 1px solid #D5D4D8;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#text-field-top {
+    grid-column: 2 / span 1;
+    grid-row: 2;
+}
+#text-field-bottom {
+    grid-column: 4 /span 1;
+    grid-row: 2;
+}
+
+#submit-button {
+    background: linear-gradient(90deg, #8FA01F 1.18%, #DED93E 100%);
+    font-family: 'Karla';
+    color: white;
+    border-radius: 5px;
+    grid-column: 2/span 3;
+    grid-row: 4;
+    border: none;
 }
