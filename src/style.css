@@ -1,0 +1,28 @@
+#root {
+    font-family: 'Karla';
+}
+
+.navbar > img {
+    width: auto;
+    height: 65px;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 65px;
+    margin: -10px;
+    background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+}
+
+.navbar > p {
+    margin-left: 15px;
+    color: white;
+    font-weight: 400;
+    line-height: 24.25px;
+    font-style:normal;
+    letter-spacing: -0.07em;
+    font-size: 20.75px;
+}
