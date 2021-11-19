@@ -1,9 +1,32 @@
-import React from 'react';
+import React, {useCallback, useRef} from 'react';
+import {toPng, toJpeg} from 'html-to-image';
 import Draggable from 'react-draggable';
 
-export default function Meme(props) {
-    
 
+export default function Meme(props) {
+    const ref = useRef(null);
+    const onButtonClickPNG= useCallback(() => {
+        if(ref.current === null) {
+            return;
+        }
+        toPng(ref.current, {cacheBust:true}).then((dataURL) => {
+            const link = document.createElement('a');
+            link.download = 'meme.png';
+            link.href = dataURL;
+            link.click()
+        }).catch((err) => {console.log(err)})
+    },[ref]);
+    const onButtonClickJpeg= useCallback(() => {
+        if(ref.current === null) {
+            return;
+        }
+        toJpeg(ref.current, {cacheBust:true}).then((dataURL) => {
+            const link = document.createElement('a');
+            link.download = 'meme.jpeg';
+            link.href = dataURL;
+            link.click()
+        }).catch((err) => {console.log(err)})
+    },[ref]);
     return (
         <div className="meme">
             <Form 
@@ -11,16 +34,18 @@ export default function Meme(props) {
                 form_data={props.form_data} 
                 clickHandler={props.clickHandler} 
                 newText={props.newText}/>
-            <Image 
+            
+            <div className="image" ref={ref}><Image 
                 url={props.url} 
                 width={props.width} 
                 height={props.height} 
                 form_data={props.form_data} 
-                box_count={props.box_count}/>
+                box_count={props.box_count}
+            /></div>
             
             <p>(You can drag around the text and place it as you like on the image)</p>
-            <button className="download-button"> download as PNG</button>
-            <button className="download-button"> download as JPEG</button>
+            <button className="download-button" onClick={onButtonClickPNG}> download as PNG</button>
+            <button className="download-button" onClick={onButtonClickJpeg}> download as JPEG</button>
             
         </div>
     );
@@ -28,7 +53,6 @@ export default function Meme(props) {
 
 
 function Form({box_count, form_data, clickHandler, newText}) {
-    console.log(form_data[0])
     function getTextBoxes({box_count, newText}) {
         let b = [];
         for(let i = 1; i <= box_count; i++) {
@@ -65,10 +89,10 @@ function TextBox({box_number, text, newText}) {
 function Image(meme) {
     let meme_text_list = MemeText(meme.form_data, meme.box_count);
     return (
-        <div className="image">
+        <>
             <img src={meme.url} alt='meme' width={meme.width} height={meme.height}></img>
             {meme_text_list}
-        </div>
+        </>
     );
 }
 

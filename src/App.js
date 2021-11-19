@@ -30,6 +30,15 @@ export default function App() {
     function getMeme() {
         updateMeme(data.data.memes[Math.floor(Math.random()*data.data.memes.length)]);
     }
+
+    React.useEffect(()=>{updateFormData(oldData => {
+        let f = {};
+        for(let i = 0; i < meme.box_count; i++) {
+            f = {...f, [`Text ${i+1}`]: ""};
+        }
+        return f;
+    })}, [meme])
+
     return (
         <>
             <Navbar />
