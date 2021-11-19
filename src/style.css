@@ -15,7 +15,7 @@
     height: 65px;
     margin: -10px;
     background: linear-gradient(90deg, #8FA01F 1.18%, #DED93E 100%);
-    margin-bottom: 0px;
+    margin-bottom: 36px;
 }
 
 .navbar > p {
@@ -28,28 +28,37 @@
     font-size: 20.75px;
 }
 
+/*Meme styling*/
+
+.meme{
+    display: flex;
+    flex-direction: column;
+}
+.image {
+    align-self: center;
+    justify-self: center;
+    position: relative;
+}
+
 /* form styling */
 
 .form {
-    display: grid;
-    grid-template-columns: minmax(36px,auto) 230px 17px 230px minmax(36px,auto);
-    grid-template-rows: 36px 35px 15px 40px;
-    margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
 }
 
 .text-field {
     border: 1px solid #D5D4D8;
     border-radius: 5px;
     box-sizing: border-box;
-}
-
-#text-field-top {
-    grid-column: 2 / span 1;
-    grid-row: 2;
-}
-#text-field-bottom {
-    grid-column: 4 /span 1;
-    grid-row: 2;
+    text-indent: 5px;
+    font-family: 'Karla';
+    color: #0d0d0d;
+    align-self: center;
+    width: 230px;
+    height: 35px;
+    margin-bottom: 15px;
+    font-family: 'Karla';
 }
 
 #submit-button {
@@ -57,7 +66,51 @@
     font-family: 'Karla';
     color: white;
     border-radius: 5px;
-    grid-column: 2/span 3;
-    grid-row: 4;
     border: none;
+    width: 477px;
+    height: 40px;
+    align-self: center;
+    margin-bottom: 36px;
+}
+.download-button {
+    background: linear-gradient(90deg, #8FA01F 1.18%, #DED93E 100%);
+    font-family: 'Karla';
+    color: white;
+    border-radius: 5px;
+    border: none;
+    width: 477px;
+    height: 40px;
+    align-self: center;
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+
+.meme > p {
+    text-align: center;
+}
+
+.meme-text {
+    position: absolute;
+    width: auto;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 15px 0;
+    padding: 0 5px;
+    font-family: impact, sans-serif;
+    font-size: 2em;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1px;
+    text-shadow:
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        0 2px 0 #000,
+        2px 0 0 #000,
+        0 -2px 0 #000,
+        -2px 0 0 #000,
+        2px 2px 5px #000;
+    top:0;
 }
