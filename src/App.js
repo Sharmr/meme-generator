@@ -15,9 +15,26 @@ export default function App() {
         return f;
     });
 
+    function addNewTextBox() {
+        updateMeme((previousMeme) => {
+            return {
+                ...previousMeme,
+                box_count: previousMeme.box_count + 1,
+            };
+        });
+    }
+
+    function removeTextBox() {
+        updateMeme((previousMeme) => {
+            return {
+                ...previousMeme,
+                box_count: previousMeme.box_count - 1,
+            };
+        });
+    }
+
     function newText(event) {
         const {value, name} = event.target;
-        console.log(event.target);
         updateFormData((oldData) => {
             return {
                 ...oldData,
@@ -37,7 +54,7 @@ export default function App() {
             f = {...f, [`Text ${i+1}`]: ""};
         }
         return f;
-    })}, [meme])
+    })}, [meme.id]);
 
     return (
         <>
@@ -50,6 +67,8 @@ export default function App() {
                 height={meme.height}
                 form_data={form_data}
                 newText={newText}
+                addNewTextBox={addNewTextBox}
+                removeTextBox={removeTextBox}
             />
         </>
     );

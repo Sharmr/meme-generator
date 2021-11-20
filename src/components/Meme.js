@@ -33,9 +33,12 @@ export default function Meme(props) {
                 box_count={props.box_count} 
                 form_data={props.form_data} 
                 clickHandler={props.clickHandler} 
-                newText={props.newText}/>
+                newText={props.newText}
+                addNewTextBox={props.addNewTextBox}
+                removeTextBox={props.removeTextBox}/>
             
-            <div className="image" ref={ref}><Image 
+            <div className="image" ref={ref}>
+            <Image 
                 url={props.url} 
                 width={props.width} 
                 height={props.height} 
@@ -52,7 +55,7 @@ export default function Meme(props) {
 }
 
 
-function Form({box_count, form_data, clickHandler, newText}) {
+function Form({box_count, form_data, clickHandler, newText, addNewTextBox,removeTextBox}) {
     function getTextBoxes({box_count, newText}) {
         let b = [];
         for(let i = 1; i <= box_count; i++) {
@@ -64,10 +67,12 @@ function Form({box_count, form_data, clickHandler, newText}) {
     return (
             <div className="form">
                 {boxes}
+                <button className="more-boxes" onClick={addNewTextBox}>Add a Box</button>
+                <button className="more-boxes" onClick={removeTextBox}>Remove a Box</button>
                 <input 
                     type='submit' 
                     id='submit-button' 
-                    value='Generate Meme'
+                    value='New Random Meme'
                     onClick = {clickHandler}
                 />
             </div>
@@ -75,6 +80,7 @@ function Form({box_count, form_data, clickHandler, newText}) {
 }
 
 function TextBox({box_number, text, newText}) {
+    console.log('made a textbox');
     return (
         <input 
             type='text' 

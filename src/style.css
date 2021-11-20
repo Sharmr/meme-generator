@@ -85,6 +85,21 @@
     margin-bottom: 2px;
 }
 
+.more-boxes {
+    background: linear-gradient(90deg, #8FA01F 1.18%, #DED93E 100%);
+    font-family: 'Karla';
+    color: white;
+    border-radius: 5px;
+    border: none;
+    width: auto;
+    height: 40px;
+    align-self: center;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+
 .meme > p {
     text-align: center;
 }
