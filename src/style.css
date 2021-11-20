@@ -72,6 +72,8 @@
     align-self: center;
     margin-bottom: 36px;
 }
+
+
 .download-button {
     background: linear-gradient(90deg, #8FA01F 1.18%, #DED93E 100%);
     font-family: 'Karla';
@@ -83,6 +85,12 @@
     align-self: center;
     margin-top: 10px;
     margin-bottom: 2px;
+}
+
+.upload {
+    align-self: center;
+    align-content: center;
+    margin-bottom: 25px;
 }
 
 .more-boxes {

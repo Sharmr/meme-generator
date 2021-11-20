@@ -35,7 +35,8 @@ export default function Meme(props) {
                 clickHandler={props.clickHandler} 
                 newText={props.newText}
                 addNewTextBox={props.addNewTextBox}
-                removeTextBox={props.removeTextBox}/>
+                removeTextBox={props.removeTextBox}
+                handleUpload={props.handleUpload}/>
             
             <div className="image" ref={ref}>
             <Image 
@@ -55,7 +56,7 @@ export default function Meme(props) {
 }
 
 
-function Form({box_count, form_data, clickHandler, newText, addNewTextBox,removeTextBox}) {
+function Form({box_count, form_data, clickHandler, newText, addNewTextBox,removeTextBox, handleUpload}) {
     function getTextBoxes({box_count, newText}) {
         let b = [];
         for(let i = 1; i <= box_count; i++) {
@@ -75,12 +76,20 @@ function Form({box_count, form_data, clickHandler, newText, addNewTextBox,remove
                     value='New Random Meme'
                     onClick = {clickHandler}
                 />
+                <div className='upload'>
+                    <p>Or upload your own image</p>
+                    <input 
+                        type='file'
+                        accept='image/png image/jpeg image/jpg'
+                        id='upload-button'
+                        onChange = {handleUpload}
+                    />
+                </div>
             </div>
     );
 }
 
 function TextBox({box_number, text, newText}) {
-    console.log('made a textbox');
     return (
         <input 
             type='text' 
@@ -96,7 +105,7 @@ function Image(meme) {
     let meme_text_list = MemeText(meme.form_data, meme.box_count);
     return (
         <>
-            <img src={meme.url} alt='meme' width={meme.width} height={meme.height}></img>
+            <img src={meme.url} alt='meme'></img>
             {meme_text_list}
         </>
     );

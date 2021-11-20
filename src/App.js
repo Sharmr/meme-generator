@@ -44,6 +44,21 @@ export default function App() {
         console.log(form_data);
     }
 
+    function handleUpload(event) {
+        event.preventDefault();
+        const image=meme.url;
+        try{
+            image = URL.createObjectURL(event.target.files[0]);
+        } catch(e) {console.log(e); return;}
+        updateMeme((oldMeme)=>{
+            return {
+                ...oldMeme,
+                name: event.target.files[0].name,
+                url: image,
+            }
+        })
+    }
+
     function getMeme() {
         updateMeme(data.data.memes[Math.floor(Math.random()*data.data.memes.length)]);
     }
@@ -54,7 +69,7 @@ export default function App() {
             f = {...f, [`Text ${i+1}`]: ""};
         }
         return f;
-    })}, [meme.id]);
+    })}, [meme.name]);
 
     return (
         <>
@@ -69,6 +84,7 @@ export default function App() {
                 newText={newText}
                 addNewTextBox={addNewTextBox}
                 removeTextBox={removeTextBox}
+                handleUpload={handleUpload}
             />
         </>
     );
