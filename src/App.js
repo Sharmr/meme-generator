@@ -45,8 +45,8 @@ export default function App() {
     }
 
     function handleUpload(event) {
-        event.preventDefault();
-        const image=meme.url;
+        let image=meme.url;
+        console.log(image);
         try{
             image = URL.createObjectURL(event.target.files[0]);
         } catch(e) {console.log(e); return;}
