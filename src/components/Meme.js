@@ -114,7 +114,14 @@ function Image(meme) {
 function MemeText(form_data, box_count) {
     let meme_text_list = [];
     for(let i=0; i < box_count; i++) {
-        meme_text_list.push(<Draggable bounds="parent" defaultPosition={{x:-200, y: i*100}}><h2 className='meme-text'>{form_data[`Text ${i+1}`]}</h2></Draggable>);
+        meme_text_list.push(
+            <Draggable 
+                bounds="parent" 
+                defaultPosition={{x:0, y: i*100}}>
+                    <h2 className='meme-text'>
+                        {form_data[`Text ${i+1}`]}
+                    </h2>
+            </Draggable>);
     }
     return meme_text_list;
 }

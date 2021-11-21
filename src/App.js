@@ -1,11 +1,19 @@
 import Navbar from "./components/Navbar";
 import Meme from "./components/Meme";
-import data from "./memesData";
 import React from "react";
+
 
 export default function App() {
 
-    const random_meme = data.data.memes[Math.floor(Math.random()*data.data.memes.length)];
+    const [meme_list, updateMemeList] = React.useState([{
+        "id": "438680",
+                "name": "Batman Slapping Robin",
+                "url": "https://i.imgflip.com/9ehk.jpg",
+                "width": 400,
+                "height": 387,
+                "box_count": 2
+    }]);
+    const random_meme = meme_list[Math.floor(Math.random()*meme_list.length)];
     const [meme, updateMeme] = React.useState(random_meme);
     const [form_data, updateFormData] = React.useState(() => {
         let f = {};
@@ -14,6 +22,13 @@ export default function App() {
         }
         return f;
     });
+    
+    React.useEffect(() => {
+        console.log('ran useEffect');
+        fetch("https://api.imgflip.com/get_memes")
+                .then(response => response.json())
+                .then(json => updateMemeList(json.data.memes));
+    }, []);
 
     function addNewTextBox() {
         updateMeme((previousMeme) => {
@@ -41,7 +56,6 @@ export default function App() {
                 [name]: value
             }
         });
-        console.log(form_data);
     }
 
     function handleUpload(event) {
@@ -60,7 +74,7 @@ export default function App() {
     }
 
     function getMeme() {
-        updateMeme(data.data.memes[Math.floor(Math.random()*data.data.memes.length)]);
+        updateMeme(meme_list[Math.floor(Math.random()*meme_list.length)]);
     }
 
     React.useEffect(()=>{updateFormData(oldData => {
