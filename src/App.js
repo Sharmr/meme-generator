@@ -27,7 +27,7 @@ export default function App() {
 
     React.useEffect(()=>{updateFormData(oldData => {
         return populateForm(oldData, meme.box_count);
-    })}, [meme]);
+    })}, [meme.name]);
 
     function addNewTextBox() {
         updateMeme((previousMeme) => {
