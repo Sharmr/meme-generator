@@ -1,34 +1,33 @@
 import Navbar from "./components/Navbar";
 import Meme from "./components/Meme";
 import React from "react";
+import { populateForm } from "./Helper";
 
 
 export default function App() {
 
-    const [meme_list, updateMemeList] = React.useState([{
+
+    const [meme_list, updateMemeList] = React.useState([]);
+    const [meme, updateMeme] = React.useState({
         "id": "438680",
                 "name": "Batman Slapping Robin",
                 "url": "https://i.imgflip.com/9ehk.jpg",
                 "width": 400,
                 "height": 387,
                 "box_count": 2
-    }]);
-    const random_meme = meme_list[Math.floor(Math.random()*meme_list.length)];
-    const [meme, updateMeme] = React.useState(random_meme);
-    const [form_data, updateFormData] = React.useState(() => {
-        let f = {};
-        for(let i = 0; i < meme.box_count; i++) {
-            f = {...f, [`Text ${i+1}`]: ""};
-        }
-        return f;
     });
+    const [form_data, updateFormData] = React.useState(populateForm({}, meme.box_count));
     
+
     React.useEffect(() => {
-        console.log('ran useEffect');
         fetch("https://api.imgflip.com/get_memes")
                 .then(response => response.json())
                 .then(json => updateMemeList(json.data.memes));
     }, []);
+
+    React.useEffect(()=>{updateFormData(oldData => {
+        return populateForm(oldData, meme.box_count);
+    })}, [meme]);
 
     function addNewTextBox() {
         updateMeme((previousMeme) => {
@@ -48,7 +47,7 @@ export default function App() {
         });
     }
 
-    function newText(event) {
+    function handleChange(event) {
         const {value, name} = event.target;
         updateFormData((oldData) => {
             return {
@@ -77,13 +76,7 @@ export default function App() {
         updateMeme(meme_list[Math.floor(Math.random()*meme_list.length)]);
     }
 
-    React.useEffect(()=>{updateFormData(oldData => {
-        let f = {};
-        for(let i = 0; i < meme.box_count; i++) {
-            f = {...f, [`Text ${i+1}`]: ""};
-        }
-        return f;
-    })}, [meme.name]);
+    
 
     return (
         <>
@@ -95,7 +88,7 @@ export default function App() {
                 width={meme.width}
                 height={meme.height}
                 form_data={form_data}
-                newText={newText}
+                handleChange={handleChange}
                 addNewTextBox={addNewTextBox}
                 removeTextBox={removeTextBox}
                 handleUpload={handleUpload}

@@ -33,7 +33,7 @@ export default function Meme(props) {
                 box_count={props.box_count} 
                 form_data={props.form_data} 
                 clickHandler={props.clickHandler} 
-                newText={props.newText}
+                handleChange={props.handleChange}
                 addNewTextBox={props.addNewTextBox}
                 removeTextBox={props.removeTextBox}
                 handleUpload={props.handleUpload}/>
@@ -56,15 +56,15 @@ export default function Meme(props) {
 }
 
 
-function Form({box_count, form_data, clickHandler, newText, addNewTextBox,removeTextBox, handleUpload}) {
-    function getTextBoxes({box_count, newText}) {
+function Form({box_count, form_data, clickHandler, handleChange, addNewTextBox,removeTextBox, handleUpload}) {
+    function getTextBoxes({box_count, handleChange}) {
         let b = [];
         for(let i = 1; i <= box_count; i++) {
-            b.push(<TextBox box_number={i} text={form_data[`Text ${i}`]} newText={newText} key={i}/>);
+            b.push(<TextBox box_number={i} text={form_data[`Text ${i}`]} handleChange={handleChange} key={i}/>);
         }
         return b;
     }
-    const boxes = getTextBoxes({box_count, newText});
+    const boxes = getTextBoxes({box_count, handleChange});
     return (
             <div className="form">
                 {boxes}
@@ -89,13 +89,13 @@ function Form({box_count, form_data, clickHandler, newText, addNewTextBox,remove
     );
 }
 
-function TextBox({box_number, text, newText}) {
+function TextBox({box_number, text, handleChange}) {
     return (
         <input 
             type='text' 
             className='text-field' 
             name={`Text ${box_number}`}
-            onChange={newText}
+            onChange={handleChange}
             value={text}
          />
     );
@@ -117,8 +117,9 @@ function MemeText(form_data, box_count) {
         meme_text_list.push(
             <Draggable 
                 bounds="parent" 
-                defaultPosition={{x:0, y: i*100}}>
-                    <h2 className='meme-text'>
+                defaultPosition={{x:0, y: i*100}}
+                key={i}>
+                    <h2 key={i} className='meme-text'>
                         {form_data[`Text ${i+1}`]}
                     </h2>
             </Draggable>);
